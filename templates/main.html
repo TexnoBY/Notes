@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Note
+{% endblock %}
+
+{% block content %}
+
+    {% for note in notes %}
+        <h2>{{ note.title }}</h2>
+        <p>
+            {{ note.body }}
+        </p>
+        <p>
+            Author: {{ note.author }}.
+        </p>
+        <p>
+            Published: {{ note.publish }}.
+        </p>
+    {% endfor %}
+
+{% endblock %}
