@@ -5,6 +5,12 @@
     <title>{% block title %} DEFAULT TITLE {% endblock %}</title>
 </head>
 <body>
+{% if request.user.is_authenticated %}
+    HI {{ request.user.first_name }}
+    <a href="{% url "main_page:logout" %}">logout</a>
+{% else %}
+        <a href="{% url "main_page:login" %}">login</a>
+{% endif %}
 
 {% block content %}
 {% endblock %}
