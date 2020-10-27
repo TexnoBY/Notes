@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Note(models.Model):
 
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250, blank=True, default='Note')
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     body = models.TextField()
 
