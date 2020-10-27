@@ -11,6 +11,7 @@ Note
 
 
     {% for note in notes %}
+
         <h2>{{ note.title }}</h2>
         <p>
             {{ note.body }}
@@ -21,6 +22,12 @@ Note
         <p>
             Published: {{ note.publish }}.
         </p>
+        <p>
+{#            <a href={% url 'edit' id=item.id %}>Edit</a>#}
+            <a href={% url 'main_page:delete_note' note_id=note.id %}>Delete</a>
+        </p>
+
+
     {% endfor %}
 
 {% endblock %}

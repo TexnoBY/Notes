@@ -1,12 +1,15 @@
-from django.shortcuts import render, redirect
-
-from django.shortcuts import redirect
-from . import models
-from . import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView
+from django.views.generic.edit import DeleteView
+
+from . import forms
+from . import models
+
+
 # Create your views here.
 
 
@@ -14,13 +17,6 @@ class NoteListView(LoginRequiredMixin, ListView):
     queryset = models.Note.objects.all()
     context_object_name = 'notes'
     template_name = 'main.html'
-
-
-# def all_notes(request):
-#     notes_lst = models.Note.objects.all()
-#     return render(request,
-#                   'main.html',
-#                   {'notes': notes_lst})
 
 
 def add_note(request):
@@ -38,6 +34,10 @@ def add_note(request):
                   'add_new_note.html',
                   {'form': note_form})
 
+
+def delete_note(request, note_id):
+    models.Note.objects.filter(id=note_id).delete()
+    return redirect('main_page:all_notes')
 
 
 
