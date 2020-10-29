@@ -7,9 +7,10 @@
 <body>
 {% if request.user.is_authenticated %}
     HI {{ request.user.first_name }}
-    <a href="{% url "main_page:logout" %}">logout</a>
+    <a href="{% url "logout" %}">logout</a>
 {% else %}
-        <a href="{% url "main_page:login" %}">login</a>
+        <a href="{% url "login" %}">login</a>
+        <a href="{% url "django_registration_register" %}">Registration</a>
 {% endif %}
 
 {% block content %}
