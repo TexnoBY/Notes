@@ -9,6 +9,7 @@
     HI {{ request.user.username }}
     <a href="{% url "logout" %}">logout</a>
     <a href="{% url 'password_change' %}">Change password</a>
+    <a href="{% url 'main_page:profile' %}">Profile</a>
 {% else %}
         <a href="{% url "login" %}">login</a>
         <a href="{% url "django_registration_register" %}">Registration</a>

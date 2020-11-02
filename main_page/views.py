@@ -8,6 +8,7 @@ from django.views.generic.edit import DeleteView
 
 from . import forms
 from . import models
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -62,5 +63,31 @@ def redirect_to_main_or_login(request):
         return redirect('login')
 
 
+def edit_user(request):
+    if request.method == "POST":
+        user_form = forms.UserEditForm(data=request.POST,
+                                       instance=request.user)
+        profile_form = forms.ProfileEditForm(data=request.POST,
+                                             instance=request.user.profile,
+                                             files=request.FILES)
+        user_form.save()
+        # if not profile_form.cleaned_data['photo']:
+        #     profile_form.cleaned_data['photo'] = request.user.profile.photo
+        profile_form.save()
+        return render(request,
+                      'profile.html',
+                      {'user': request.user})
+    else:
+        user_form = forms.UserEditForm(instance=request.user)
+        profile_form = forms.ProfileEditForm(instance=request.user.profile)
+    return render(request,
+                  'edit_profile.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})
+
+
+@login_required
+def view_profile(request):
+    return render(request, 'profile.html', {'user': request.user})
 
 

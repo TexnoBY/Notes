@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.conf import settings
 
 
 class Note(models.Model):
@@ -25,7 +26,11 @@ class Note(models.Model):
     def __str__(self):
         return self.slug
 
-class MyUser(User):
-    def get_absolute_url(self):
-        return reverse('main_page:all_notes',
-                       args=[self.username])
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    birth = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return '{} profile'.format(self.user.username)

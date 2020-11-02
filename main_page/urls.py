@@ -5,6 +5,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'main_page'
 
@@ -18,7 +20,9 @@ urlpatterns = [
     path('user/<str:username>/', views.all_notes, name='all_notes'),
     path('<int:note_id>/', views.delete_note, name='delete_note'),
     path('add/', views.add_note, name='add_note'),
-
-    # path('password_reset/', MyHack.as_view(), name='password_reset'),
+    path('edit_user/', views.edit_user, name='edit_user'),
+    path('profile/', views.view_profile, name='profile')
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

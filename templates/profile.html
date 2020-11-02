@@ -1,0 +1,11 @@
+{% block title %} Person profile {% endblock %}
+
+{% block content %}
+    <p><a href="{% url "main_page:edit_user" %}">Edit profile</a></p>
+
+    <p>first_name: {{ user.first_name}}</p>
+    <p>last name:  {{ user.last_name }}</p>
+    <p>birthday:{{ user.profile.birth }}</p>
+
+    <p><a href="{% url 'main_page:to_main_or_login' %}">to main</a></p>
+{% endblock %}
