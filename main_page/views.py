@@ -59,7 +59,7 @@ def redirect_to_main_or_login(request):
         return redirect('main_page:all_notes',
                         request.user.username)
     else:
-        return redirect('main_page:login')
+        return redirect('login')
 
 
 
