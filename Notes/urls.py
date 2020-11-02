@@ -21,6 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_page.urls', namespace='main_page')),
 
-    path('', include('django_registration.backends.one_step.urls')),
-    path('', include('django.contrib.auth.urls')),
 ]

@@ -124,4 +124,4 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
-LOGIN_REDIRECT_URL = '' #'user'
+LOGIN_REDIRECT_URL = 'main_page:to_main_or_login'
