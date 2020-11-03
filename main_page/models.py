@@ -38,7 +38,6 @@ class Note(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
-    birth = models.DateTimeField(blank=True, null=True)
+    friends = models.ManyToManyField(User,
+                                     related_name='friends')
 
-    def __str__(self):
-        return '{} profile'.format(self.user.username)

@@ -18,7 +18,6 @@ from django.contrib.auth.decorators import login_required
 class NoteListView(LoginRequiredMixin, ListView):
     queryset = models.Note.objects.all()
     context_object_name = 'notes'
-
     template_name = 'main.html'
 
 
@@ -51,7 +50,6 @@ def add_note(request):
 
 def delete_note(request, note_id):
     models.Note.objects.filter(id=note_id).delete()
-    # return redirect('main_page:all_notes')
     return redirect('main_page:to_main_or_login')
 
 
@@ -82,6 +80,27 @@ def edit_note(request, year, month, day, slug):
     return render(request,
                   'edit_note.html',
                   {'note_form': note_form})
+
+
+def create_user(request):
+    if request.method == "POST":
+        user_form = forms.UserEditForm(data=request.POST,
+                                       instance=request.user)
+        profile_form = forms.ProfileEditForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            new_profile_form = profile_form.save(commit=False)
+            new_profile_form.user = request.user
+            user_form.save()
+            # profile_form.save()
+            new_profile_form.save()
+            return redirect('main_page:to_main_or_login')
+    else:
+        user_form = forms.UserEditForm(instance=request.user)
+        profile_form = forms.ProfileEditForm()
+    return render(request,
+                  'edit_profile.html',
+                  {'user_form': user_form,
+                   'profile_form': profile_form})
 
 
 def edit_user(request):

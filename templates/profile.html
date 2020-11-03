@@ -5,7 +5,13 @@
 
     <p>first_name: {{ user.first_name}}</p>
     <p>last name:  {{ user.last_name }}</p>
-    <p>birthday:{{ user.profile.birth }}</p>
+    <p>friends:</p>
+    <ol>
+
+    {% for friend in user.profile.friends.all %}
+        <li>{{ friend }}</li>
+    {% endfor %}
+    </ol>
 
     <p><a href="{% url 'main_page:to_main_or_login' %}">to main</a></p>
 {% endblock %}
