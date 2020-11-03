@@ -23,6 +23,14 @@ class Note(models.Model):
     access = models.ManyToManyField(User,
                                     related_name='access',
                                     default=author)
+
+    def get_absolute_url(self):
+        return reverse('main_page:edit_note',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
+
     def __str__(self):
         return self.slug
 

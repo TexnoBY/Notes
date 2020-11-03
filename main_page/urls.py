@@ -21,7 +21,10 @@ urlpatterns = [
     path('<int:note_id>/', views.delete_note, name='delete_note'),
     path('add/', views.add_note, name='add_note'),
     path('edit_user/', views.edit_user, name='edit_user'),
-    path('profile/', views.view_profile, name='profile')
+    path('profile/', views.view_profile, name='profile'),
+    path('<int:year>/<int:month>/<int:day>/<slug:slug>/',
+          views.edit_note,
+          name='edit_note'),
 ]
 
 if settings.DEBUG:

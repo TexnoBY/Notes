@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import DeleteView
+from django.shortcuts import get_object_or_404
 
 from . import forms
 from . import models
@@ -39,7 +40,6 @@ def add_note(request):
             new_note.author = request.user
             new_note.slug = new_note.title.replace(" ", "-") + new_note.body.replace(" ", "-")
             new_note.save()
-            # return redirect('main_page:all_notes')
             return redirect('main_page:to_main_or_login')
     else:
 
@@ -63,6 +63,27 @@ def redirect_to_main_or_login(request):
         return redirect('login')
 
 
+def edit_note(request, year, month, day, slug):
+    note = get_object_or_404(models.Note,
+                             slug=slug,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
+    if request.method == "POST":
+        note_form = forms.NoteForm(data=request.POST,
+                                   instance=note)
+        if note_form.is_valid():
+            edit_note = note_form.save(commit=False)
+            edit_note.slug = edit_note.title.replace(" ", "-") + edit_note.body.replace(" ", "-")
+            edit_note.save()
+            return redirect('main_page:to_main_or_login')
+    else:
+        note_form = forms.NoteForm(instance=note)
+    return render(request,
+                  'edit_note.html',
+                  {'note_form': note_form})
+
+
 def edit_user(request):
     if request.method == "POST":
         user_form = forms.UserEditForm(data=request.POST,
@@ -71,8 +92,6 @@ def edit_user(request):
                                              instance=request.user.profile,
                                              files=request.FILES)
         user_form.save()
-        # if not profile_form.cleaned_data['photo']:
-        #     profile_form.cleaned_data['photo'] = request.user.profile.photo
         profile_form.save()
         return render(request,
                       'profile.html',
@@ -89,5 +108,6 @@ def edit_user(request):
 @login_required
 def view_profile(request):
     return render(request, 'profile.html', {'user': request.user})
+
 
 

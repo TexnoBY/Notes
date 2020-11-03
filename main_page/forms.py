@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 class NoteForm(forms.ModelForm):
     class Meta:
         model = models.Note
-        fields = ('title', 'body', 'access')
+        fields = ('title', 'body')
+        # fields = ('title', 'body', 'access')
 
 
 class UserEditForm(forms.ModelForm):
