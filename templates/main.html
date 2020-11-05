@@ -4,29 +4,38 @@
 Note
 {% endblock %}
 
+
+{% block tool_links %}
+    <a class="tool__link" href="{% url 'main_page:add_note' %}">Add note</a>
+{% endblock %}
 {% block content %}
-    <p>
-        <a href="{% url "main_page:add_note" %}">Create New Material</a>
-    </p>
 
-
+<div class="notes">
     {% for note in notes %}
+        <div class="notes__item">
+            <h2 style="margin-bottom: 3px;">{{ note.title }}</h2>
+            
+            <p>
+                {{ note.body|linebreaksbr }}
+            </p>
+            <p>
+                Author: {{ note.author }}.
+            </p>
+            <p>
+                Published: {{ note.publish }}.
+            </p>
 
-        <h2>{{ note.title }}</h2>
-        <p>
-            {{ note.body }}
-        </p>
-        <p>
-            Author: {{ note.author }}.
-        </p>
-        <p>
-            Published: {{ note.publish }}.
-        </p>
-        <p>
-{#            <a href={% url 'edit' id=item.id %}>Edit</a>#}
-            <a href="{{ note.get_absolute_url }}">edit</a>
-            <a href={% url 'main_page:delete_note' note_id=note.id %}>Delete</a>
-        </p>
+            <a class="note__tool" href="{{ note.get_absolute_url }}">edit</a> <br>
+            <a class="note__tool" href={% url 'main_page:delete_note' note_id=note.id %}>Delete</a>
+
+        </div>
     {% endfor %}
+</div>
+
+
+
+
+
+
 
 {% endblock %}

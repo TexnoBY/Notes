@@ -1,0 +1,187 @@
+body {
+    margin: 0;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+
+    background: #fff url("img/intro-bg.jpg");
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+/* Container
+===================*/
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header
+===================*/
+
+.header {
+    width: 100%;
+    height: 100px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header__welcome {
+    text-transform: uppercase;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px 0;
+
+    border-bottom: 1px solid #fff;
+}
+
+
+/* Nav
+===================*/
+
+.nav {
+    display: flex;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: auto;
+}
+
+.nav__link {
+    margin-left: 50px;
+    text-decoration: none;
+    color: #fff;
+    
+}
+
+.nav__link:first-child {
+    margin-left: 0;
+}
+
+.nav__link:hover {
+    opacity: 0.75;
+}
+
+/*Tool_link
+===================*/
+
+.tool__link {
+    text-transform: uppercase;
+    text-decoration: none;
+
+    margin-left: 50px;
+    color: #fff;
+}
+
+.tool__link:hover {
+    opacity: 0.75;
+}
+
+
+/*Filling
+===================*/
+
+.filling{
+    padding-top: 130px;
+}
+
+
+/*Notes
+===================*/
+
+.notes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.notes__item {
+    width: 25%;
+    font-size: 13px;
+    padding: 15px 40px;
+    justify-content: center;
+}
+
+.note__tool {
+    text-transform: uppercase;
+    text-decoration: none;
+
+    color: #e84545;
+}
+
+.note__tool:hover {
+    opacity: 0.75;
+}
+
+.td__title {
+    width: 100px;
+}
+
+.note__edit {
+    /*display: table-column;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*text-align: center;*/
+    /*display: block;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+}
+
+/*Input
+===================*/
+input:focus {
+  border: 3px solid #555;
+}
+
+.td__title > label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+.td__input > input[type=text] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.td__input > textarea  {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+input[type=submit] {
+    background-color: #920000;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

@@ -1,12 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %} edit note {% endblock %}
+{% block title %} Edit note {% endblock %}
 
 {% block content %}
-    <h2>update note:</h2>
-    <form action="." method="post" enctype="multipart/form-data">
-        {{ note_form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Update note">
-    </form>
+    <div class="note__edit">
+        <h2 style="margin-bottom: 5px;" >UPDATE NOTE</h2>
+        <form action="." method="post">
+            <table>
+
+                {% for field in note_form %}
+                    <tr>
+                          {{ field.errors }}
+                          <td class="td__title" style="width: 10%;">
+                              {{ field.label_tag }}
+                          </td>
+                          <td class="td__input" style="width: 80%;">
+                              {{ field }}
+                          </td>
+                          {% if field.help_text %}
+                              <p class="help">{{ field.help_text|safe }}</p>
+                          {% endif %}
+                    </tr>
+                {% endfor %}
+                {% csrf_token %}
+            </table>
+
+            <input type="submit" value="Update note">
+        </form>
+    </div>
 {% endblock %}

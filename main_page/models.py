@@ -5,6 +5,11 @@ from django.urls import reverse
 from django.conf import settings
 
 
+class PracticeManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(material_type='practice')
+
+
 class Note(models.Model):
 
     title = models.CharField(max_length=250, blank=True, default='Note')

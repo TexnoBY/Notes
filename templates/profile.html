@@ -1,6 +1,7 @@
 {% block title %} Person profile {% endblock %}
 
 {% block content %}
+    <a class="nav__link" href="{% url 'password_change' %}">Change password</a>
     <p><a href="{% url "main_page:edit_user" %}">Edit profile</a></p>
 
     <p>first_name: {{ user.first_name}}</p>

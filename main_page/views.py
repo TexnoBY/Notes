@@ -37,7 +37,8 @@ def add_note(request):
         if note_form.is_valid():
             new_note = note_form.save(commit=False)
             new_note.author = request.user
-            new_note.slug = new_note.title.replace(" ", "-") + new_note.body.replace(" ", "-")
+            new_note.slug = '-'.join((new_note.title + new_note.body).split())
+            # new_note.slug = new_note.title.replace(" ", "-") + new_note.body.replace(" ", "-").repla
             new_note.save()
             return redirect('main_page:to_main_or_login')
     else:
