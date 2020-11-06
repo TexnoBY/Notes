@@ -1,18 +1,10 @@
-from django.urls import path
-from django.shortcuts import redirect
-from django.urls import include
-from django.contrib.auth import views as auth_views
-from django.urls import reverse_lazy
-
-from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
+
+from . import views
 
 app_name = 'main_page'
-
-
-# class MyHack(auth_views.PasswordResetView):
-#     success_url = reverse_lazy('main_page:password_reset_done')
 
 urlpatterns = [
     path('', views.redirect_to_main_or_login, name='to_main_or_login'),

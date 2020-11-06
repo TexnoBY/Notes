@@ -1,13 +1,13 @@
 from django import forms
-from . import models
 from django.contrib.auth.models import User
+
+from . import models
 
 
 class NoteForm(forms.ModelForm):
     class Meta:
         model = models.Note
         fields = ('title', 'body')
-        # fields = ('title', 'body', 'access')
 
 
 class UserEditForm(forms.ModelForm):

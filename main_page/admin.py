@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from . import models
 
 # Register your models here.
@@ -14,10 +15,6 @@ class NoteAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ('publish',)
 
-
-# @admin.register(models.Profile)
-# class ProfileAdmin(admin.ModelAdmin):
-#     list_display = ('user',)
 
 
 

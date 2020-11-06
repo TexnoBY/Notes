@@ -1,20 +1,20 @@
+from string import punctuation
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.views.generic.edit import DeleteView
-from django.shortcuts import get_object_or_404
 
 from . import forms
 from . import models
-from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
-from string import punctuation
+
 
 class NoteListView(LoginRequiredMixin, ListView):
     queryset = models.Note.objects.all()
