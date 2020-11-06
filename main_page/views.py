@@ -130,8 +130,15 @@ def edit_user(request):
 
 
 @login_required
-def view_profile(request):
-    return render(request, 'profile.html', {'user': request.user})
+def view_profile(request, username='', id=0):
+    if username and id:
+        user = get_object_or_404(User,
+                                 username=username,
+                                 id=id)
+    else:
+        user = request.user
+
+    return render(request, 'profile.html', {'user': user})
 
 
 

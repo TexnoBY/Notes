@@ -2,7 +2,7 @@ body {
     margin: 0;
 
     font-family: 'Raleway', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     color: #fff;
     -webkit-font-smoothing: antialiased;
 
@@ -95,7 +95,7 @@ p {
     text-transform: uppercase;
     text-decoration: none;
 
-    margin-left: 50px;
+    margin-left: 30px;
     color: #fff;
 }
 
@@ -111,6 +111,11 @@ p {
     padding-top: 130px;
 }
 
+.prof__link {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+}
 
 /*Notes
 ===================*/
@@ -125,6 +130,9 @@ p {
     font-size: 13px;
     padding: 15px 40px;
     justify-content: center;
+    border: #fff 1px solid;
+    border-radius: 4px;
+    margin: 0 5px;
 }
 
 .note__tool {
@@ -196,3 +204,4 @@ input[type=submit] {
     cursor: pointer;
     margin: 10px;
 }
+

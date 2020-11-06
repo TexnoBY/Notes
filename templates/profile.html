@@ -13,8 +13,8 @@
     <p>Friends:</p>
     <ol>
         {% for friend in user.profile.friends.all %}
-            <li><a href="{{ friend.get_absolute_url }}">{{ friend }}</a></li>
-            <p>{{ friend.get_absolute_url }}</p>
+            <li><a class="tool__link" href="{{ friend.get_absolute_url }}" style="margin-left: 10px">{{ friend }}</a></li>
+
         {% endfor %}
     </ol>
 {% endblock %}

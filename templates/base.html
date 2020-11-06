@@ -29,7 +29,7 @@
                     
 
                     <a class="tool__link" href="{% url 'main_page:to_main_or_login' %}">to main</a>
-                    <a class="nav__link" href="{% url 'main_page:profile' %}">Profile</a>                    
+                    <a class="nav__link" href="{{ request.user.get_absolute_url }}">Profile</a>
                     <a class="nav__link" href="{% url "logout" %}">logout</a>
                 {% else %}                        
                         <a class="nav__link" href="{% url "django_registration_register" %}">registration</a>

@@ -47,3 +47,7 @@ class Profile(models.Model):
     friends = models.ManyToManyField(User,
                                      related_name='friends')
 
+
+User.get_absolute_url = lambda self: reverse('main_page:profile',
+                                             args=[self.username, self.id])
+
