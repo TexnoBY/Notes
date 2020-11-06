@@ -126,13 +126,15 @@ p {
 }
 
 .notes__item {
-    width: 25%;
+    width: 24%;
     font-size: 13px;
     padding: 15px 40px;
     justify-content: center;
     border: #fff 1px solid;
     border-radius: 4px;
-    margin: 0 5px;
+    margin: 5px;
+    background: rgba(187, 185, 188, 0.5);
+
 }
 
 .note__tool {

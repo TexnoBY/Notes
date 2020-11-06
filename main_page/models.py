@@ -25,9 +25,6 @@ class Note(models.Model):
                                on_delete=models.CASCADE,
                                related_name='user_note')
 
-    access = models.ManyToManyField(User,
-                                    related_name='access',
-                                    default=author)
 
     def get_absolute_url(self):
         return reverse('main_page:edit_note',
@@ -46,6 +43,8 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE)
     friends = models.ManyToManyField(User,
                                      related_name='friends')
+    def __str__(self):
+        return '{} Profile'.format(self.user.username)
 
 
 User.get_absolute_url = lambda self: reverse('main_page:profile',
