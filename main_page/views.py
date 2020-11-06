@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+from string import punctuation
 
 class NoteListView(LoginRequiredMixin, ListView):
     queryset = models.Note.objects.all()
@@ -37,8 +38,8 @@ def add_note(request):
         if note_form.is_valid():
             new_note = note_form.save(commit=False)
             new_note.author = request.user
-            new_note.slug = '-'.join((new_note.title + new_note.body).split())
-            # new_note.slug = new_note.title.replace(" ", "-") + new_note.body.replace(" ", "-").repla
+            new_note.slug = '-'.join(new_note.title.split())
+
             new_note.save()
             return redirect('main_page:to_main_or_login')
     else:
@@ -62,18 +63,19 @@ def redirect_to_main_or_login(request):
         return redirect('login')
 
 
-def edit_note(request, year, month, day, slug):
+def edit_note(request, year, month, day, slug, id):
     note = get_object_or_404(models.Note,
                              slug=slug,
                              publish__year=year,
                              publish__month=month,
-                             publish__day=day)
+                             publish__day=day,
+                             id=id)
     if request.method == "POST":
         note_form = forms.NoteForm(data=request.POST,
                                    instance=note)
         if note_form.is_valid():
             edit_note = note_form.save(commit=False)
-            edit_note.slug = edit_note.title.replace(" ", "-") + edit_note.body.replace(" ", "-")
+            edit_note.slug = '-'.join(edit_note.title.split())
             edit_note.save()
             return redirect('main_page:to_main_or_login')
     else:

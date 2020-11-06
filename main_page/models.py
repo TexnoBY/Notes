@@ -34,7 +34,8 @@ class Note(models.Model):
                        args=[self.publish.year,
                              self.publish.month,
                              self.publish.day,
-                             self.slug])
+                             self.slug,
+                             self.id])
 
     def __str__(self):
         return self.slug

@@ -23,7 +23,7 @@ urlpatterns = [
     path('edit_user/', views.edit_user, name='edit_user'),
     path('create_user/', views.create_user, name='create_user'),
     path('profile/', views.view_profile, name='profile'),
-    path('<int:year>/<int:month>/<int:day>/<slug:slug>/',
+    path('<int:year>/<int:month>/<int:day>/<slug:slug>/<int:id>/',
           views.edit_note,
           name='edit_note'),
 ]
