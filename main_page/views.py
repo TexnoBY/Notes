@@ -23,18 +23,14 @@ class NoteListView(LoginRequiredMixin, ListView):
 
 
 def all_notes(request, username):
-    all_notes = models.Note.objects.filter(author__in=request.user.profile.friends.all())
-    # all_notes = []
-    # if request.user.username == username:
-    #     all_notes.append(models.Note.objects.filter(author=request.user))
-    #     for friend in request.user.profile.friends.objects.all():
-    #         if friend == request.user:
-    #             continue
-    #         all_notes.append(models.Note.objects.filter(author=friend))
-    # else:
-    #     user = get_object_or_404(User, username=username)
-    #     if request.user in user.profile.friends:
-    #         all_notes.append(models.Note.objects.filter(author=user))
+    if request.user.username == username:
+        all_notes = models.Note.objects.filter(author__in=request.user.profile.friends.all())
+    else:
+        user = get_object_or_404(User, username=username)
+        if request.user in request.user.profile.friends.all():
+            all_notes = models.Note.objects.filter(author=user)
+        else:
+            all_notes = None
     return render(request,
                   'main.html',
                   {'notes': all_notes})
