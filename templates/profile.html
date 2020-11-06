@@ -10,6 +10,7 @@
 
     <p>First Name: {{ user.first_name}}</p>
     <p>Last Name:  {{ user.last_name }}</p>
+    <p><a class="note__tool" href="{% url 'main_page:all_notes' user.username %}"> Notes</a></p>
     <p>Friends:</p>
     <ol>
         {% for friend in user.profile.friends.all %}

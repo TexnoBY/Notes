@@ -11,26 +11,24 @@ Note
 {% block content %}
 
 <div class="notes">
-{#    {% for user_note in notes %}#}
-        {% for note in notes %}
-            <div class="notes__item">
-                <h2 style="text-transform:uppercase;">{{ note.title }}</h2>
+    {% for note in notes %}
+        <div class="notes__item">
+            <h2 style="text-transform:uppercase;">{{ note.title }}</h2>
 
-                <p>
-                    {{ note.body|linebreaksbr }}
-                </p>
-                <p>
-                    Author: {{ note.author }}.
-                </p>
-                <p>
-                    Published: {{ note.publish }}.
-                </p>
+            <p>
+                {{ note.body|linebreaksbr }}
+            </p>
+            <p>
+                Author: {{ note.author }}.
+            </p>
+            <p>
+                Published: {{ note.publish }}.
+            </p>
 
-                <a class="note__tool" href="{{ note.get_absolute_url }}">edit</a>
-                <a class="note__tool" href={% url 'main_page:delete_note' note_id=note.id %}>Delete</a>
+            <a class="note__tool" href="{{ note.get_absolute_url }}">edit</a>
+            <a class="note__tool" href={% url 'main_page:delete_note' note_id=note.id %}>Delete</a>
 
-            </div>
-        {% endfor %}
-{#    {% endfor %}#}
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}
