@@ -3,11 +3,39 @@
 {% block title %} edit profile {% endblock %}
 
 {% block content %}
-    <h2>update your profile:</h2>
+    <h2>Update your profile</h2>
     <form action="." method="post">
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Update profile">
+            <table>
+                {% for field in user_form %}
+                    <tr>
+                          {{ field.errors }}
+                          <td class="td__title" style="width: 10%;">
+                              {{ field.label_tag }}
+                          </td>
+                          <td class="td__input" style="width: 80%;">
+                              {{ field }}
+                          </td>
+                          {% if field.help_text %}
+                              <p class="help">{{ field.help_text|safe }}</p>
+                          {% endif %}
+                    </tr>
+                {% endfor %}
+                {%  for field in profile_form %}
+                    <tr>
+                          {{ field.errors }}
+                          <td class="td__title" style="width: 10%;">
+                              {{ field.label_tag }}
+                          </td>
+                          <td class="td__input" style="width: 80%;">
+                              {{ field }}
+                          </td>
+                          {% if field.help_text %}
+                              <p class="help">{{ field.help_text|safe }}</p>
+                          {% endif %}
+                    </tr>
+                {% endfor %}
+                {% csrf_token %}
+            </table>
+            <input type="submit" value="Update Profile">
     </form>
 {% endblock %}

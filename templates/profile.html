@@ -1,18 +1,22 @@
+{% extends 'base.html' %}
 {% block title %} Person profile {% endblock %}
 
+{% block tool_links %}
+    <a class="tool__link" href="{% url 'password_change' %}">Change password</a>
+    <a class="tool__link" href="{% url "main_page:edit_user" %}">Edit profile</a>
+    <a class="tool__link" href="{% url 'main_page:to_main_or_login' %}">to main</a>
+
+{% endblock %}
+
 {% block content %}
-    <a class="nav__link" href="{% url 'password_change' %}">Change password</a>
-    <p><a href="{% url "main_page:edit_user" %}">Edit profile</a></p>
 
-    <p>first_name: {{ user.first_name}}</p>
-    <p>last name:  {{ user.last_name }}</p>
-    <p>friends:</p>
+    <p>First Name: {{ user.first_name}}</p>
+    <p>Last Name:  {{ user.last_name }}</p>
+    <p>Friends:</p>
     <ol>
-
-    {% for friend in user.profile.friends.all %}
-        <li>{{ friend }}</li>
-    {% endfor %}
+        {% for friend in user.profile.friends.all %}
+            <li><a href="{{ friend.get_absolute_url }}">{{ friend }}</a></li>
+            <p>{{ friend.get_absolute_url }}</p>
+        {% endfor %}
     </ol>
-
-    <p><a href="{% url 'main_page:to_main_or_login' %}">to main</a></p>
 {% endblock %}

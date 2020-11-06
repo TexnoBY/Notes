@@ -4,10 +4,26 @@
 
 {% block content %}
     <h1>Registration</h1>
-    <form action="." method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <input type="submit" value="Reg">
-    </form>
+       <form action="." method="post">
+
+            {% for field in form %}
+                <table style="width: 100%;">
+                    <tr>
+                          {{ field.errors }}
+                          <td class="td__title">
+                              {{ field.label_tag }}
+                          </td>
+                          <td class="td__input">
+                              {{ field }}
+                          </td>
+                    </tr>
+                </table>
+                {% if field.help_text %}
+                    {{ field.help_text|safe }}
+                {% endif %}
+            {% endfor %}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <input type="submit" value="Registration">
+        </form>
 {% endblock %}
