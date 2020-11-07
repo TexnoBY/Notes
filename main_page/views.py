@@ -43,7 +43,7 @@ def add_note(request):
             new_note = note_form.save(commit=False)
             new_note.author = request.user
             slug = new_note.title + new_note.body
-            new_note.slug = ''.join('-' if char == ' ' else char for char in slug if char not in punctuation)
+            new_note.slug = ''.join('_' if char in ' \n\r' else char for char in slug if char not in punctuation)
 
             new_note.save()
             return redirect('main_page:to_main_or_login')
@@ -81,7 +81,7 @@ def edit_note(request, year, month, day, slug, id):
         if note_form.is_valid():
             edit_note = note_form.save(commit=False)
             slug = edit_note.title + edit_note.body
-            edit_note.slug = ''.join('-' if char == ' ' else char for char in slug if char not in punctuation)
+            edit_note.slug = ''.join('_' if char in ' \n\r' else char for char in slug if char not in punctuation)
             edit_note.save()
             return redirect('main_page:to_main_or_login')
     else:
