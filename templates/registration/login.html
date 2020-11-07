@@ -5,7 +5,9 @@
 {% block content %}
     <h2>User login:</h2>
     {% if form.errors %}
-        BAD CRED
+        <p>
+            Invalid username or password
+        </p>
     {% endif %}
     <form action="." method="post">
             <table>

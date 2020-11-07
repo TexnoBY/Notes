@@ -13,48 +13,32 @@ class NoteTestCase(TestCase):
 
     def setUp(self):
         super(NoteTestCase, self).setUp()
-        self.user = models.User(username='Test',
-                                first_name='te',
-                                last_name='st',
-                                email='gg@ggg.com',)
-        self.user.save()
+        self.user = models.User.objects.create_user(username='testuser',
+                                                    password='yuhjnmgk')
         self.client = Client()
+        login = self.client.login(username='testuser', password='yuhjnmgk')
 
-    def test_note_created_return_200(self):
+
+    def test_note_created_return_302(self):
         response = self.client.post(
             '/add/',
             {'title': 'note          ' + punctuation + '  asdas dasdas  ',
-             'body': 'testbody' + punctuation + 'bbasdfdas sadfdasfa   ',
-             'author': self.user,},
+             'body': 'testbody' + punctuation + 'bbasdfdas sadfdasfa   '},
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_add_one_note(self):
         self.client.post(
             '/add/',
             {'title': 'note          ' + punctuation + '  asdas dasdas  ',
-             'body': 'testbody' + punctuation + 'bbasdfdas sadfdasfa   ',
-             'author': self.user},
+             'body': 'testbody' + punctuation + 'bbasdfdas sadfdasfa   '},
         )
         models.Note.objects.get()
 
-    @ddt.data(('    note   ' + punctuation, punctuation + '   body    '),
-              ('note   badsaf' + punctuation, punctuation + 'bbbb   body'))
-    @ddt.unpack
-    def test_slug_created(self, title, body):
-        self.client.post(
-            '/add/',
-            {'title': title,
-             'body': body,
-             'author': self.user,},
-        )
-        note = models.Note.objects.get()
-        self.assertEqual(note.slug, title)
-
     @ddt.data(
-        ('sl ug1', 'sl-ug1testbody'),
-        ('s lug 1', 's-lug-1testbody'),
-        ('s   lug1', 's---lug1testbody'),
+        ('sl ug1', 'sl_ug1testbody'),
+        ('s lug 1', 's_lug_1testbody'),
+        ('s   lug1', 's___lug1testbody'),
     )
     @ddt.unpack
     def test_slug_created_correctly(self, title, expected_slug):
@@ -62,8 +46,7 @@ class NoteTestCase(TestCase):
         self.client.post(
             '/add/',
             {'title': title,
-             'body': 'testbody',
-             'author': self.user,},
+             'body': 'testbody',},
         )
         note = models.Note.objects.get()
         self.assertEqual(note.slug, expected_slug)
